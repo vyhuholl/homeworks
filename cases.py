@@ -1,6 +1,5 @@
 word = input()
 while len(word) > 0:
-    if not (word.endswith('а') or word.endswith('я') or word.endswith('у') or word.endswith('ю') or word.endswith('ы') or word.endswith('и') or word.endswith('э')):
         print('Nominative singular')
         print('Accusative singular')
     if word.endswith('а') or word.endswith('я'):
