@@ -9,7 +9,7 @@ n2 = open('nouns2.txt', 'r')
 nouns2 = [line.strip() for line in n2]
 p = open('marks.txt', 'r')
 punctuation = [line.strip() for line in p]
-i = open('imperative.txt', 'r')
+i = open('imperatives.txt', 'r')
 imperative = [line.strip() for line in i]
 def verse1:
     return (random.choice(nouns)+ ' ' + random.choice(verbs) + ' ' + random.choice(nouns) + ' ' + random.choice(punctuation))
