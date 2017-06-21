@@ -30,3 +30,7 @@ def dict_parts_of_speech(xml):
   def main():
     xml = text_process(text.xml)
     print(ana_word(xml))
+    dictionary = dict_parts_of_speech(xml)
+    d = open('dict.txt', 'w')
+    for i in dictionary:
+        d.write(i + '\t' + dictionary[i] + '\n')
