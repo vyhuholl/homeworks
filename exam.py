@@ -8,12 +8,24 @@ def xml_process(text_name):
     f.close()
     return l1
  
-def ana_word (xml):
+def ana_word(xml):
   anas = []
   for tag in xml:
     if tag startswith.('<w>'):
       anas.append(tag.count('<ana'))
   return (sum(anas))/(len(anas))
+
+def dict_parts_of_speech(xml):
+    dictionary = {}
+    l = []
+    for tag in xml:
+        part = re.findall('gr=".*,', tag)
+        l += part
+    for tag in part:
+        tag.lstrip('gr="')
+        tag.rstrip(',')
+        dictionary[tag] += 1
+    return(dictionary)
 
   def main():
     xml = text_process(text.xml)
