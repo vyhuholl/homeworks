@@ -13,7 +13,7 @@ def ana_word (xml):
   for tag in xml:
     if tag startswith.('<w>'):
       anas.append(tag.count('<ana'))
-  return (sum(anas))\(len(anas))
+  return (sum(anas))/(len(anas))
 
   def main():
     xml = text_process(text.xml)
