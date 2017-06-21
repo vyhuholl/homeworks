@@ -1,7 +1,7 @@
 def xml_process(text_name):
     f = open(text_name, 'r', encoding='utf-8')
     text = f.read()
-    l = text.split(\n)
+    l = text.split('\n')
     l1 = []
     for tag in l:
         l1.append(tag)
