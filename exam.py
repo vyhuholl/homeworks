@@ -1,3 +1,5 @@
+import re
+
 def xml_process(text_name):
     f = open(text_name, 'r', encoding='utf-8')
     text = f.read()
