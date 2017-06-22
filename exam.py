@@ -27,10 +27,17 @@ def dict_parts_of_speech(xml):
         dictionary[tag] += 1
     return(dictionary)
 
-def instrumentalis(xml):
-    for tag in xml:
-        if 'ins' in tag and 'gr="S' in tag:
-            for word in xml[(xml.index(tag) - 3),(xml.index(tag) + 3)]
+def instrumentalis(tag):
+    s = ''
+    if 'ins' in tag and 'gr="S' in tag:
+        for word in xml[(xml.index(tag) - 3),(xml.index(tag) - 1)]:
+            s += word.strip('<.*>') + ' '
+        for word in xml[(xml.index(tag))]:
+            s += '\t' + word.strip('<.*>') + '\t'
+        for word in xml[(xml.index(tag) + 1),(xml.index(tag) + 3)]:
+            s += word.strip('<.*>') + ' '
+        s += '\n'
+     return s
 
   def main():
     xml = text_process(text.xml)
@@ -39,3 +46,10 @@ def instrumentalis(xml):
     d = open('dict.txt', 'w')
     for i in dictionary:
         d.write(i + '\t' + dictionary[i] + '\n')
+    ins = open('ins.txt', 'w')
+    for tag in xml:
+        ins.write(instrumentalis(tag))
+    d.close()
+    ins.close()
+ 
+main()
