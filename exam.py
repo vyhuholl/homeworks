@@ -27,6 +27,11 @@ def dict_parts_of_speech(xml):
         dictionary[tag] += 1
     return(dictionary)
 
+def instrumentalis(xml):
+    for tag in xml:
+        if 'ins' in tag and 'gr="S' in tag:
+            for word in xml[(xml.index(tag) - 3),(xml.index(tag) + 3)]
+
   def main():
     xml = text_process(text.xml)
     print(ana_word(xml))
