@@ -1,0 +1,17 @@
+import urllib.request
+req = urllib.request.Request('http://www.marpravda.ru/')
+with urllib.request.urlopen(req) as response:
+   html = response.read().decode('utf-8')
+import re
+regPostTitle = re.compile('<div class="news_name"><a href=".*">.*</a></div>', flags= re.DOTALL)
+titles = regPostTitle.findall(html)
+new_titles = []
+regTag = re.compile('<.*?>', re.DOTALL)
+regSpace = re.compile('\s{2,}', re.DOTALL)
+for t in titles:
+    clean_t = regSpace.sub("", t)
+    clean_t = regTag.sub("", clean_t)
+    new_titles.append(clean_t)
+headlines = open('headlines.txt', 'w')
+for title in new_titles:
+    headlines.write(title + '\n')
