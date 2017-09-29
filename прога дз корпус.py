@@ -3,6 +3,7 @@ import html
 import time
 import os
 import re
+import csv
 
 def download_page(pageUrl):
     try:
@@ -33,9 +34,9 @@ for year in range(2016, 2018):
                 os.makedirs(path + 'not mystem/')
                 os.makedirs(path + 'mystem XML')
                 os.makedirs(path + 'mystem plain text')
-                csv = open('csv_table.csv', 'w')
-                writer = csv.writer(csv, delimiter=' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-                writer.writerow('path', 'author', 'sex', 'birthday', 'header', 'created', 'sphere', 'genre_fi', 'type', 'topic', 'chronotop', 'style', 'audience_age', 'audience_level', 'audience_size', 'source', 'publication', 'publisher',	'publ_year', 'medium', 'country', 'region', 'language')
+                csv_table = open(path + 'csv_table.csv', 'w')
+                writer = csv.writer(csv_table, delimiter=' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+                writer.writerow(['path', 'author', 'sex', 'birthday', 'header', 'created', 'sphere', 'genre_fi', 'type', 'topic', 'chronotop', 'style', 'audience_age', 'audience_level', 'audience_size', 'source', 'publication', 'publisher',	'publ_year', 'medium', 'country', 'region', 'language'])
                 titles = regPostTitle.findall(page)
                 new_titles = []
                 for t in titles:
@@ -48,6 +49,37 @@ for year in range(2016, 2018):
                     clean_l = clean_l.strip('"')
                     new_links.append(clean_l)
                 topics = regPostTopic.findall(page)
+                new_topics = []
+                for t in topics:
+                    clean_t = regTag.sub("", t)
+                    new_topics.append(clean_t)
+                print(new_titles)
+                print(new_links)
+                print(new_topics)
+                for i in range(len(titles)):
+                    header = new_titles[i]
+                    link = new_links[i]
+                    topic = new_topics[i]
+                    text = download_page(link)
+                    author = regPostAuthor(text)
+                    clean_author = regTag.sub('', author)
+                    text = regTag.sub('', text)
+                    text = regScript.sub('', text)
+                    text = regComment.sub('', text)
+                    file_path = path + 'not mystem/' + header + '.txt'
+                    file = open(file_path, 'w')
+                    file.write('@au' + author + '\n')
+                    file.write('@ti' + header + '\n')
+                    file.write('@da' + date + '\n')
+                    file.write('@topic' + topic + '\n')
+                    file.write('@url' + link + '\n')
+                    file.write(text)
+                    writer.writerow([file_path, author, '', '', header, date, 'публицистика', '', '', topic, '', 'нейтральный', 'н-возраст', 'н-уровень', 'республиканская', link, 'Марийская правда', '', year, 'газета', 'Россия', 'республика Марий-Эл', 'ru'])
+                inp = path + 'not mystem/'
+                lst = os.listdir(inp)
+                for fl in lst:
+                    os.system(r"C:\mystem.exe " + inp + os.sep + fl + " mystem XML" + os.sep + fl + '-- xml')
+                    os.system(r"C:\mystem.exe " + inp + os.sep + fl + " mystem plain text" + os.sep + fl)
                 new_topics = []
                 for t in topics:
                     clean_t = regTag.sub("", t)
