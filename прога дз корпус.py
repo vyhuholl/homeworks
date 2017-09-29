@@ -15,17 +15,10 @@ def download_page(pageUrl):
         return('Error')
 
 commonUrl = 'http://www.marpravda.ru/news/?day='
-regPostTitle = re.compile('<div class=\"news_name\"><a href=\".*\">.*</a></div>', flags= re.DOTALL)
-regTitle1 = re.compile('<div class=\"news_name\"><a href=\".*\">', flags= re.DOTALL)
-regTitle2 = re.compile('</a></div>', flags= re.DOTALL)
-regPostLink = re.compile('<a class=\"left\" href=\".*\">Читать далее</a>', flags= re.DOTALL)
-regLink1 = re.compile('<a class="left" href="', flags= re.DOTALL)
-regLink2 = re.compile('\">Читать далее</a>', flags= re.DOTALL)
-regPostTopic = re.compile('<span class=\"rubric\"><a href=\".*\">.*</a>', flags= re.DOTALL)
-regTopic1 = re.compile('<span class=\"rubric\"><a href=\".*\">', flags= re.DOTALL)
-regTopic2 = re.compile('</a>', flags= re.DOTALL)
-regPostAuthor = re.compile('Автор статьи: <br /> <a href=\"javascript:void(0);\">.*</a>', flags= re.DOTALL)
-regAuthor1 = re.compile('Автор статьи: <br /> <a href=\"javascript:void(0);\">', flags= re.DOTALL)
+regPostTitle = re.compile('<div class=\"news_name\"><a href=\"(.*?)\">(.*?)</a></div>', flags= re.DOTALL)
+regPostTopic = re.compile('<span class=\"rubric\"><a href=\"(.*?)\">(.*?)</a>', flags= re.DOTALL)
+regPostAuthor = re.compile('<a href=\"javascript:void\(0\);\">(.*?)</a>', flags= re.DOTALL)
+regAuthor1 = re.compile('<a href=\"javascript:void\(0\);\">', flags= re.DOTALL)
 regAuthor2 = re.compile('</a>', flags= re.DOTALL)
 regTag = re.compile('<.*?>', re.DOTALL)
 regScript = re.compile('<script>.*?</script>', re.DOTALL)
@@ -45,9 +38,41 @@ for year in range(2016, 2018):
                 csv_table = open(path + 'csv_table.csv', 'w')
                 writer = csv.writer(csv_table, delimiter=' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
                 writer.writerow(['path', 'author', 'sex', 'birthday', 'header', 'created', 'sphere', 'genre_fi', 'type', 'topic', 'chronotop', 'style', 'audience_age', 'audience_level', 'audience_size', 'source', 'publication', 'publisher',	'publ_year', 'medium', 'country', 'region', 'language'])
-                titles = regPostTitle.findall(page)
-                new_titles = []
-                for t in titles:
+                t = regPostTitle.findall(page)
+                links = []
+                titles = []
+                for i in t:
+                    links.append(i[0])
+                    titles.append(i[1])
+                t1 = regPostTopic.findall(page)
+                topics = []
+                for i in t1:
+                    topics.append(i[1])
+                for i in range(len(titles)):
+                    header = titles[i]
+                    link = links[i]
+                    topic = topics[i]
+                    text = download_page(link)
+                    author = (regPostAuthor.search(text)).group()
+                    clean_author = regAuthor1.sub('', author)
+                    clean_author = regAuthor2.sub('', clean_author)
+                    text = regTag.sub('', text)
+                    text = regScript.sub('', text)
+                    text = regComment.sub('', text)
+                    file_path = path + 'not mystem/' + header + '.txt'
+                    file = open(file_path, 'w')
+                    file.write('@au' + author + '\n')
+                    file.write('@ti' + header + '\n')
+                    file.write('@da' + date + '\n')
+                    file.write('@topic' + topic + '\n')
+                    file.write('@url' + link + '\n')
+                    file.write(text)
+                    writer.writerow([file_path, clean_author, '', '', header, date, 'публицистика', '', '', topic, '', 'нейтральный', 'н-возраст', 'н-уровень', 'республиканская', link, 'Марийская правда', '', year, 'газета', 'Россия', 'республика Марий-Эл', 'ru'])
+                inp = path + 'not mystem/'
+                lst = os.listdir(inp)
+                for fl in lst:
+                    os.system(r"C:\mystem.exe " + inp + os.sep + fl + " mystem XML" + os.sep + fl + '-- xml')
+                    os.system(r"C:\mystem.exe " + inp + os.sep + fl + " mystem plain text" + os.sep + fl)
                     clean_t = regTitle1.sub("", t)
                     clean_t = regTitle2.sub("", clean_t)
                     new_titles.append(clean_t)
