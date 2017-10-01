@@ -37,7 +37,7 @@ for year in range(2016, 2018):
                 titles = []
                 for i in t:
                     links.append(i[0])
-                    title = i[1].strip('?')
+                    title = re.sub('?', '', i[1])
                     titles.append(title)
                 t1 = regPostTopic.findall(page)
                 topics = []
