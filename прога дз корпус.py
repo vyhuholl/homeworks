@@ -57,6 +57,7 @@ for year in range(2016, 2018):
                         author = 'no author'
                     text = (regArticle.search(text)).group()
                     text = regTag.sub('', text)
+                    text = text.replace('\u2212', '')
                     file_path = path + 'not mystem/' + header + '.txt'
                     file = open(file_path, 'w')
                     file.write('@au' + author + '\n')
