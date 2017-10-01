@@ -32,14 +32,13 @@ for year in range(2016, 2018):
             if page != 'Error':
                 path = 'C:/homework' + os.sep + str(year) + os.sep + str(month) + os.sep + str(day) + os.sep
                 os.makedirs(path + 'not mystem')
-                os.makedirs(path + 'mystem XML')
-                os.makedirs(path + 'mystem plain text')
                 t = regPostTitle.findall(page)
                 links = []
                 titles = []
                 for i in t:
                     links.append(i[0])
-                    titles.append(i[1])
+                    title = i[1].strip('?')
+                    titles.append(title)
                 t1 = regPostTopic.findall(page)
                 topics = []
                 for i in t1:
