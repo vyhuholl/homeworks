@@ -31,12 +31,9 @@ for year in range(2016, 2018):
             page = download_page(pageUrl)
             if page != 'Error':
                 path = 'C:/homework' + os.sep + str(year) + os.sep + str(month) + os.sep + str(day) + os.sep
-                os.makedirs(path + 'not mystem/')
+                os.makedirs(path + 'not mystem')
                 os.makedirs(path + 'mystem XML')
                 os.makedirs(path + 'mystem plain text')
-                csv_table = open(path + 'csv_table.csv', 'w')
-                writer = csv.writer(csv_table, delimiter=' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-                writer.writerow(['path', 'author', 'sex', 'birthday', 'header', 'created', 'sphere', 'genre_fi', 'type', 'topic', 'chronotop', 'style', 'audience_age', 'audience_level', 'audience_size', 'source', 'publication', 'publisher',	'publ_year', 'medium', 'country', 'region', 'language'])
                 t = regPostTitle.findall(page)
                 links = []
                 titles = []
@@ -65,7 +62,10 @@ for year in range(2016, 2018):
                     file.write('@topic' + topic + '\n')
                     file.write('@url' + link + '\n')
                     file.write(text)
-                    writer.writerow([file_path, author, '', '', header, date, 'публицистика', '', '', topic, '', 'нейтральный', 'н-возраст', 'н-уровень', 'республиканская', link, 'Марийская правда', '', year, 'газета', 'Россия', 'республика Марий-Эл', 'ru'])
+                    csv_table = open(path + 'csv_table.csv', 'w')
+                    writer = csv.DictWriter(csv_table, fieldnames = ['path', 'author', 'sex', 'birthday', 'header', 'created', 'sphere', 'genre_fi', 'type', 'topic', 'chronotop', 'style', 'audience_age', 'audience_level', 'audience_size', 'source', 'publication', 'publisher', 'publ_year', 'medium', 'country', 'region', 'language'], delimiter = '   ')
+                    writer.writeheader()
+                    writer.writerow({'path': file_path, 'author': author, 'sex': '', 'birthday': '', 'header': header, 'created': date, 'sphere': 'публицистика', 'genre_fi': '', 'type': '', 'topic': topic, 'chronotop': '', 'style': 'нейтральный', 'audience_age': 'н-возраст', 'audience_level': 'н-уровень', 'audience_size': 'республиканская', 'source': link, 'publication': 'Марийская правда', 'publisher': '', 'publ_year': year, 'medium': 'газета', 'country': 'Россия', 'region': 'республика Марий-Эл', 'language': 'ru'})
                 inp = path + 'not mystem/'
                 lst = os.listdir(inp)
                 for fl in lst:
