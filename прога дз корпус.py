@@ -49,9 +49,12 @@ for year in range(2016, 2018):
                     link = links[i]
                     topic = topics[i]
                     text = download_page(commonUrl + link)
-                    author = (regPostAuthor.search(text)).group()
-                    author = regAuthor1.sub('', author)
-                    author = regAuthor2.sub('', author)
+                    try:
+                        author = (regPostAuthor.search(text)).group()
+                        author = regAuthor1.sub('', author)
+                        author = regAuthor2.sub('', author)
+                    except:
+                        author = 'no author'
                     text = (regArticle.search(text)).group()
                     text = regTag.sub('', text)
                     file_path = path + 'not mystem/' + header + '.txt'
