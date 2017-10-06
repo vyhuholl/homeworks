@@ -23,9 +23,9 @@ regArticle = re.compile('<article>(.*?)</article>', flags= re.DOTALL)
 regTag = re.compile('<.*?>', flags= re.DOTALL)
 m = Mystem()
 
-for year in range(2016, 2017):
-    for month in range(5, 6):
-        for day in range(11, 32):
+for year in range(2016, 2018):
+    for month in range(1, 13):
+        for day in range(1, 32):
             date = str(day) + '.' + str(month) + '.' + str(year)
             pageUrl = commonUrl + 'news/?day=' + date
             page = download_page(pageUrl)
@@ -70,29 +70,30 @@ for year in range(2016, 2017):
                         author = regAuthor2.sub('', author)
                     except:
                         author = 'no author'
-                    text = (regArticle.search(text)).group()
-                    text = regTag.sub('', text)
-                    text = text.replace('\u2212', '')
-                    text = text.replace(';', '')
-                    text = text.replace('&nbsp', '')
-                    text1 = m.lemmatize(text)
-                    file_path = path + 'not_mystem' + os.sep + str(i) + '.txt'
-                    file_path_plain_text = path + 'mystem_plain_text' + os.sep + str(i) + '.txt'
-                    file_path_xml = path + 'mystem_XML' + os.sep + str(i) + '.xml'
-                    file = open(file_path, 'w')
-                    file.write('@au ' + author + '\n')
-                    file.write('@ti ' + header + '\n')
-                    file.write('@da ' + date + '\n')
-                    file.write('@topic ' + topic + '\n')
-                    file.write('@url ' + commonUrl + link + '\n')
                     try:
-                        file.write(text)
-                        writer.writerow({'path': file_path, 'author': author, 'sex': '', 'birthday': '', 'header': header, 'created': date, 'sphere': 'публицистика', 'genre_fi': '', 'type': '', 'topic': topic, 'chronotop': '', 'style': 'нейтральный', 'audience_age': 'н-возраст', 'audience_level': 'н-уровень', 'audience_size': 'республиканская', 'source': link, 'publication': 'Марийская правда', 'publisher': '', 'publ_year': year, 'medium': 'газета', 'country': 'Россия', 'region': 'республика Марий-Эл', 'language': 'ru'})
-                    except:
-                        print('Error')
-                    file_plain_text = open(file_path_plain_text, 'w')
-                    file_plain_text.write(' '.join(text1))
-                    file_plain_text.close()
-                    file_xml = open(file_path_xml, 'w')
-                    file_xml.write(' '.join(text1))
-                    file_xml.close()
+                        text = (regArticle.search(text)).group()
+                        text = regTag.sub('', text)
+                        text = text.replace('\u2212', '')
+                        text = text.replace(';', '')
+                        text = text.replace('&nbsp', '')
+                        text1 = m.lemmatize(text)
+                        file_path = path + 'not_mystem' + os.sep + str(i) + '.txt'
+                        file_path_plain_text = path + 'mystem_plain_text' + os.sep + str(i) + '.txt'
+                        file_path_xml = path + 'mystem_XML' + os.sep + str(i) + '.xml'
+                        file = open(file_path, 'w')
+                        file.write('@au ' + author + '\n')
+                        file.write('@ti ' + header + '\n')
+                        file.write('@da ' + date + '\n')
+                        file.write('@topic ' + topic + '\n')
+                        file.write('@url ' + commonUrl + link + '\n')
+                        try:
+                            file.write(text)
+                            writer.writerow({'path': file_path, 'author': author, 'sex': '', 'birthday': '', 'header': header, 'created': date, 'sphere': 'публицистика', 'genre_fi': '', 'type': '', 'topic': topic, 'chronotop': '', 'style': 'нейтральный', 'audience_age': 'н-возраст', 'audience_level': 'н-уровень', 'audience_size': 'республиканская', 'source': link, 'publication': 'Марийская правда', 'publisher': '', 'publ_year': year, 'medium': 'газета', 'country': 'Россия', 'region': 'республика Марий-Эл', 'language': 'ru'})
+                        except:
+                            print('Error')
+                        file_plain_text = open(file_path_plain_text, 'w')
+                        file_plain_text.write(' '.join(text1))
+                        file_plain_text.close()
+                        file_xml = open(file_path_xml, 'w')
+                        file_xml.write(' '.join(text1))
+                        file_xml.close()
