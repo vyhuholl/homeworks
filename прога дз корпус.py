@@ -3,7 +3,7 @@ import html
 import os
 import re
 import csv
-from pymystem3 import mystem
+from pymystem3 import Mystem
 
 def download_page(pageUrl):
     try:
@@ -24,8 +24,8 @@ regTag = re.compile('<.*?>', flags= re.DOTALL)
 m = Mystem()
 
 for year in range(2016, 2017):
-    for month in range(2, 3):
-        for day in range(10, 32):
+    for month in range(5, 6):
+        for day in range(11, 32):
             date = str(day) + '.' + str(month) + '.' + str(year)
             pageUrl = commonUrl + 'news/?day=' + date
             page = download_page(pageUrl)
@@ -75,7 +75,7 @@ for year in range(2016, 2017):
                     text = text.replace('\u2212', '')
                     text = text.replace(';', '')
                     text = text.replace('&nbsp', '')
-                    text1 = m.analyze(text)
+                    text1 = m.lemmatize(text)
                     file_path = path + 'not_mystem' + os.sep + str(i) + '.txt'
                     file_path_plain_text = path + 'mystem_plain_text' + os.sep + str(i) + '.txt'
                     file_path_xml = path + 'mystem_XML' + os.sep + str(i) + '.xml'
@@ -85,12 +85,14 @@ for year in range(2016, 2017):
                     file.write('@da ' + date + '\n')
                     file.write('@topic ' + topic + '\n')
                     file.write('@url ' + commonUrl + link + '\n')
-                    file.write(text)
-                    writer.writerow({'path': file_path, 'author': author, 'sex': '', 'birthday': '', 'header': header, 'created': date, 'sphere': 'публицистика', 'genre_fi': '', 'type': '', 'topic': topic, 'chronotop': '', 'style': 'нейтральный', 'audience_age': 'н-возраст', 'audience_level': 'н-уровень', 'audience_size': 'республиканская', 'source': link, 'publication': 'Марийская правда', 'publisher': '', 'publ_year': year, 'medium': 'газета', 'country': 'Россия', 'region': 'республика Марий-Эл', 'language': 'ru'})
-                    file.close()
+                    try:
+                        file.write(text)
+                        writer.writerow({'path': file_path, 'author': author, 'sex': '', 'birthday': '', 'header': header, 'created': date, 'sphere': 'публицистика', 'genre_fi': '', 'type': '', 'topic': topic, 'chronotop': '', 'style': 'нейтральный', 'audience_age': 'н-возраст', 'audience_level': 'н-уровень', 'audience_size': 'республиканская', 'source': link, 'publication': 'Марийская правда', 'publisher': '', 'publ_year': year, 'medium': 'газета', 'country': 'Россия', 'region': 'республика Марий-Эл', 'language': 'ru'})
+                    except:
+                        print('Error')
                     file_plain_text = open(file_path_plain_text, 'w')
-                    file_plain_text.write(text1)
+                    file_plain_text.write(' '.join(text1))
                     file_plain_text.close()
                     file_xml = open(file_path_xml, 'w')
-                    file_xml.write(text1)
+                    file_xml.write(' '.join(text1))
                     file_xml.close()
