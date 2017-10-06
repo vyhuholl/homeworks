@@ -1,6 +1,5 @@
 import urllib.request
 import html
-import time
 import os
 import re
 import csv
@@ -9,7 +8,6 @@ def download_page(pageUrl):
     try:
         page = urllib.request.urlopen(pageUrl)
         text = page.read().decode('utf-8')
-        time.sleep(2)
         return text
     except:
         return('Error')
@@ -29,9 +27,14 @@ for year in range(2016, 2018):
             date = str(day) + '.' + str(month) + '.' + str(year)
             pageUrl = commonUrl + 'news/?day=' + date
             page = download_page(pageUrl)
-            if page != 'Error' and os.path.exists(path + 'not mystem') == False:
-                path = 'C:/homework' + os.sep + str(year) + os.sep + str(month) + os.sep + str(day) + os.sep
-                os.makedirs(path + 'not mystem')
+            path = 'C:/homework' + os.sep + str(year) + os.sep + str(month) + os.sep + str(day) + os.sep
+            if page != 'Error' and os.path.exists(path + 'not_mystem') == False:
+                os.makedirs(path + 'not_mystem')
+                os.makedirs(path + 'mystem_plain_text')
+                os.makedirs(path + 'mystem_XML')
+                csv_table = open(path + 'csv_table.csv', 'w')
+                writer = csv.DictWriter(csv_table, fieldnames = ['path', 'author', 'sex', 'birthday', 'header', 'created', 'sphere', 'genre_fi', 'type', 'topic', 'chronotop', 'style', 'audience_age', 'audience_level', 'audience_size', 'source', 'publication', 'publisher', 'publ_year', 'medium', 'country', 'region', 'language'], delimiter = '\t')
+                writer.writeheader()
                 t = regPostTitle.findall(page)
                 links = []
                 titles = []
@@ -39,6 +42,12 @@ for year in range(2016, 2018):
                     links.append(i[0])
                     title = re.sub('[\\\\/:*?"<>|-]', '', i[1])
                     title = title.replace('\ufeff', '')
+                    title = title.replace('\u2212', '')
+                    title = title.replace('\u0301', '')
+                    title = title.replace('\u200b', '')
+                    title = title.replace('\u04f0', '')
+                    title = title.replace('\u04f1', '')
+                    title = title.replace('\xff', '')
                     titles.append(title)
                 t1 = regPostTopic.findall(page)
                 topics = []
@@ -46,6 +55,10 @@ for year in range(2016, 2018):
                     topics.append(i[1])
                 for i in range(len(titles)):
                     header = titles[i]
+                    header = header.replace('\t', '')
+                    header = header.replace('\u04e7', '')
+                    if len(header) > 200:
+                        header = header[:200]
                     link = links[i]
                     topic = topics[i]
                     text = download_page(commonUrl + link)
@@ -55,24 +68,28 @@ for year in range(2016, 2018):
                         author = regAuthor2.sub('', author)
                     except:
                         author = 'no author'
-                    text = (regArticle.search(text)).group()
-                    text = regTag.sub('', text)
-                    text = text.replace('\u2212', '')
-                    text = text.replace('&nbsp', '')
-                    file_path = path + 'not mystem/' + header + '.txt'
-                    file = open(file_path, 'w')
-                    file.write('@au ' + author + '\n')
-                    file.write('@ti ' + header + '\n')
-                    file.write('@da ' + date + '\n')
-                    file.write('@topic ' + topic + '\n')
-                    file.write('@url ' + commonUrl + link + '\n')
-                    file.write(text)
-                    csv_table = open(path + 'csv_table.csv', 'w')
-                    writer = csv.DictWriter(csv_table, fieldnames = ['path', 'author', 'sex', 'birthday', 'header', 'created', 'sphere', 'genre_fi', 'type', 'topic', 'chronotop', 'style', 'audience_age', 'audience_level', 'audience_size', 'source', 'publication', 'publisher', 'publ_year', 'medium', 'country', 'region', 'language'], delimiter = '\t')
-                    writer.writeheader()
-                    writer.writerow({'path': file_path, 'author': author, 'sex': '', 'birthday': '', 'header': header, 'created': date, 'sphere': 'публицистика', 'genre_fi': '', 'type': '', 'topic': topic, 'chronotop': '', 'style': 'нейтральный', 'audience_age': 'н-возраст', 'audience_level': 'н-уровень', 'audience_size': 'республиканская', 'source': link, 'publication': 'Марийская правда', 'publisher': '', 'publ_year': year, 'medium': 'газета', 'country': 'Россия', 'region': 'республика Марий-Эл', 'language': 'ru'})
-                inp = path + 'not mystem/'
-                lst = os.listdir(inp)
-                for fl in lst:
-                    os.system(r"C:\mystem.exe " + inp + os.sep + fl + " mystem XML" + os.sep + fl + '-- xml')
-                    os.system(r"C:\mystem.exe " + inp + os.sep + fl + " mystem plain text" + os.sep + fl)
+                    try:
+                        text = (regArticle.search(text)).group()
+                        text = regTag.sub('', text)
+                        text = text.replace('\u2212', '')
+                        text = text.replace(';', '')
+                        text = text.replace('&nbsp', '')
+                        file_path = path + 'not mystem' + os.sep + str(i) + '.txt'
+                        file = open(file_path, 'w')
+                        file.write('@au ' + author + '\n')
+                        file.write('@ti ' + header + '\n')
+                        file.write('@da ' + date + '\n')
+                        file.write('@topic ' + topic + '\n')
+                        file.write('@url ' + commonUrl + link + '\n')
+                        try:
+                            file.write(text)
+                            writer.writerow({'path': file_path, 'author': author, 'sex': '', 'birthday': '', 'header': header, 'created': date, 'sphere': 'публицистика', 'genre_fi': '', 'type': '', 'topic': topic, 'chronotop': '', 'style': 'нейтральный', 'audience_age': 'н-возраст', 'audience_level': 'н-уровень', 'audience_size': 'республиканская', 'source': link, 'publication': 'Марийская правда', 'publisher': '', 'publ_year': year, 'medium': 'газета', 'country': 'Россия', 'region': 'республика Марий-Эл', 'language': 'ru'})
+                        except:
+                            print('Error at' + header)
+                    except:
+                        print('Error at' + header)
+                    inp = path + 'not mystem/'
+                    lst = os.listdir(inp)
+                    for fl in lst:
+                        os.system(r"C:\mystem.exe " + inp + os.sep + fl + " mystem XML" + os.sep + fl + '-- xml')
+                        os.system(r"C:\mystem.exe " + inp + os.sep + fl + " mystem plain text" + os.sep + fl)
