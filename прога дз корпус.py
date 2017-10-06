@@ -3,6 +3,7 @@ import html
 import os
 import re
 import csv
+from pymystem3 import mystem
 
 def download_page(pageUrl):
     try:
@@ -20,14 +21,15 @@ regAuthor1 = re.compile('<a href=\"javascript:void\(0\);\">', flags= re.DOTALL)
 regAuthor2 = re.compile('</a>', flags= re.DOTALL)
 regArticle = re.compile('<article>(.*?)</article>', flags= re.DOTALL)
 regTag = re.compile('<.*?>', flags= re.DOTALL)
+m = Mystem()
 
-for year in range(2016, 2018):
-    for month in range(1, 13):
-        for day in range(1, 32):
+for year in range(2016, 2017):
+    for month in range(2, 3):
+        for day in range(10, 32):
             date = str(day) + '.' + str(month) + '.' + str(year)
             pageUrl = commonUrl + 'news/?day=' + date
             page = download_page(pageUrl)
-            path = 'C:/homework' + os.sep + str(year) + os.sep + str(month) + os.sep + str(day) + os.sep
+            path = 'C:\homework' + os.sep + str(year) + os.sep + str(month) + os.sep + str(day) + os.sep
             if page != 'Error' and os.path.exists(path + 'not_mystem') == False:
                 os.makedirs(path + 'not_mystem')
                 os.makedirs(path + 'mystem_plain_text')
@@ -68,28 +70,27 @@ for year in range(2016, 2018):
                         author = regAuthor2.sub('', author)
                     except:
                         author = 'no author'
-                    try:
-                        text = (regArticle.search(text)).group()
-                        text = regTag.sub('', text)
-                        text = text.replace('\u2212', '')
-                        text = text.replace(';', '')
-                        text = text.replace('&nbsp', '')
-                        file_path = path + 'not mystem' + os.sep + str(i) + '.txt'
-                        file = open(file_path, 'w')
-                        file.write('@au ' + author + '\n')
-                        file.write('@ti ' + header + '\n')
-                        file.write('@da ' + date + '\n')
-                        file.write('@topic ' + topic + '\n')
-                        file.write('@url ' + commonUrl + link + '\n')
-                        try:
-                            file.write(text)
-                            writer.writerow({'path': file_path, 'author': author, 'sex': '', 'birthday': '', 'header': header, 'created': date, 'sphere': 'публицистика', 'genre_fi': '', 'type': '', 'topic': topic, 'chronotop': '', 'style': 'нейтральный', 'audience_age': 'н-возраст', 'audience_level': 'н-уровень', 'audience_size': 'республиканская', 'source': link, 'publication': 'Марийская правда', 'publisher': '', 'publ_year': year, 'medium': 'газета', 'country': 'Россия', 'region': 'республика Марий-Эл', 'language': 'ru'})
-                        except:
-                            print('Error at' + header)
-                    except:
-                        print('Error at' + header)
-                    inp = path + 'not mystem/'
-                    lst = os.listdir(inp)
-                    for fl in lst:
-                        os.system(r"C:\mystem.exe " + inp + os.sep + fl + " mystem XML" + os.sep + fl + '-- xml')
-                        os.system(r"C:\mystem.exe " + inp + os.sep + fl + " mystem plain text" + os.sep + fl)
+                    text = (regArticle.search(text)).group()
+                    text = regTag.sub('', text)
+                    text = text.replace('\u2212', '')
+                    text = text.replace(';', '')
+                    text = text.replace('&nbsp', '')
+                    text1 = m.analyze(text)
+                    file_path = path + 'not_mystem' + os.sep + str(i) + '.txt'
+                    file_path_plain_text = path + 'mystem_plain_text' + os.sep + str(i) + '.txt'
+                    file_path_xml = path + 'mystem_XML' + os.sep + str(i) + '.xml'
+                    file = open(file_path, 'w')
+                    file.write('@au ' + author + '\n')
+                    file.write('@ti ' + header + '\n')
+                    file.write('@da ' + date + '\n')
+                    file.write('@topic ' + topic + '\n')
+                    file.write('@url ' + commonUrl + link + '\n')
+                    file.write(text)
+                    writer.writerow({'path': file_path, 'author': author, 'sex': '', 'birthday': '', 'header': header, 'created': date, 'sphere': 'публицистика', 'genre_fi': '', 'type': '', 'topic': topic, 'chronotop': '', 'style': 'нейтральный', 'audience_age': 'н-возраст', 'audience_level': 'н-уровень', 'audience_size': 'республиканская', 'source': link, 'publication': 'Марийская правда', 'publisher': '', 'publ_year': year, 'medium': 'газета', 'country': 'Россия', 'region': 'республика Марий-Эл', 'language': 'ru'})
+                    file.close()
+                    file_plain_text = open(file_path_plain_text, 'w')
+                    file_plain_text.write(text1)
+                    file_plain_text.close()
+                    file_xml = open(file_path_xml, 'w')
+                    file_xml.write(text1)
+                    file_xml.close()
