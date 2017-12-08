@@ -52,7 +52,14 @@ def search():
 @app.route('127.0.0.1/results')
 def results():
     result = request.args['search']
-    results_list = {}
+    ans_dict = {}
+    for i in result:
+        ans = ''
+        with open('responses.txt') as responses:
+            for line in responses:
+                l = line.split(' ')
+                if i in l:
+                    ans.append((l[0]).strip(':'))
     return render_template('results.html', name=name)
 
 if __name__ == '__main__':
