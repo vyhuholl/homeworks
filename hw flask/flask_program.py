@@ -9,6 +9,19 @@ app = Flask(__name__)
 def main_page(name=None):
     return render_template('main_page.html', name=name)
 
+with open('responses.txt', 'w') as responses:
+    responses.write('Нож:' + request.args['sharp_knife'].join(' ') + '\n')
+    responses.write('Меч:' + request.args['sharp_sword'].join(' ') + '\n')
+    responses.write('Коготь:' + request.args['sharp_nail'].join(' ') + '\n')
+    responses.write('Сабля:' + request.args['sharp_saber'].join(' ') + '\n')
+    responses.write('Лезвие:' + request.args['sharp_blade'].join(' ') + '\n')
+    responses.write('Коса:' + request.args['sharp_scythe'].join(' ') + '\n')
+    responses.write('Ножницы:' + request.args['sharp_scissors'].join(' ') + '\n')
+    responses.write('Игла:' + request.args['sharp_needle'].join(' ') + '\n')
+    responses.write('Стрела:' + request.args['sharp_arrow'].join(' ') + '\n')
+    responses.write('Кол:' + request.args['sharp_stake'].join(' ') + '\n')
+    responses.close()
+
 @app.route('127.0.0.1/stats')
 def stats():
     native_language = request.args['native_language']
