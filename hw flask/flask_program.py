@@ -59,7 +59,8 @@ def results():
             for line in responses:
                 l = line.split(' ')
                 if i in l:
-                    ans.append((l[0]).strip(':'))
+                    ans += l[0]).strip(':') + ' '
+         ans_dict{i} = ans
     return render_template('results.html', name=name)
 
 if __name__ == '__main__':
