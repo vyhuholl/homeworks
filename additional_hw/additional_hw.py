@@ -14,3 +14,15 @@ def download_page(pageUrl):
 m = Mystem()
 
 app = Flask(__name__)
+
+@app.route('127.0.0.1/<name>')
+def main_page(name=None):
+    return render_template('main_page.html', name=name)
+
+@app.route('127.0.0.1/news')
+def news_page(name=None):
+    return render_template('news_page.html', name=name)
+
+@app.route('127.0.0.1/test')
+def test_page(name=None):
+    return render_template('test_page.html', name=name)
