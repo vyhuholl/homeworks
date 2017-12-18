@@ -18,7 +18,7 @@ for i in glosses:
     glosses_splitted.append(i.split('.'))
 for i in glosses_splitted:
     for j in i:
-        if j not in glosses_numbered and j.isupper = True:
+        if j not in glosses_numbered and j.isupper == True:
             glosses_numbered.append(j)
 c2.execute('CREATE TABLE words(id integer, Lemma text, Wordform text, Glosses text)')
 c2.execute('CREATE TABLE glosses(id integer, Gloss text, Meaning text)')
