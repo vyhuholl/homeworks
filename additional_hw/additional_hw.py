@@ -3,6 +3,10 @@ from flask import render_template
 from pymystem3 import Mystem
 import urllib.request
 
+m = Mystem()
+regTag = re.compile('<.*?>', flags= re.DOTALL)
+regPostWord = re.compile('<font color="#808080"></font>&nbsp;</td><td class="uu">', flags= re.DOTALL)
+
 def download_page(pageUrl):
     try:
         page = urllib.request.urlopen(pageUrl)
@@ -13,11 +17,11 @@ def download_page(pageUrl):
 
 with open('dictionary.txt', 'w') as dictionary:
     common_url = 'http://www.dorev.ru/ru-index.html?xmmpoll='
-    letters = ['а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ь', 'ы', 'э]']
+    letters = ['а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ь', 'ы', 'э', 'ю', 'я']
+    for i in letters:
+        word_page = download_page(common_url + i)
+        
     
-m = Mystem()
-regTag = re.compile('<.*?>', flags= re.DOTALL)
-
 app = Flask(__name__)
 
 @app.route('127.0.0.1/<name>')
