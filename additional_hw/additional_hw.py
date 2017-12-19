@@ -11,7 +11,12 @@ def download_page(pageUrl):
     except:
         return('Error')
 
+with open('dictionary.txt', 'w') as dictionary:
+    common_url = 'http://www.dorev.ru/ru-index.html?xmmpoll='
+    letters = ['а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ь', 'ы', 'э]']
+    
 m = Mystem()
+regTag = re.compile('<.*?>', flags= re.DOTALL)
 
 app = Flask(__name__)
 
@@ -21,6 +26,8 @@ def main_page(name=None):
 
 @app.route('127.0.0.1/news')
 def news_page(name=None):
+    meduza = download_page('https://meduza.io')
+    meduza_clean = regTag.sub('', meduza)
     return render_template('news_page.html', name=name)
 
 @app.route('127.0.0.1/test')
