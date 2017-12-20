@@ -77,4 +77,10 @@ def result_page(name=None):
 
 @app.route('127.0.0.1/score')
 def test_result_page(name=None):
+     score = 0
+    if request.args:
+        answers = ['answer1', 'answer2', 'answer3', 'answer4', 'answer5', 'answer6', 'answer7', 'answer8', 'answer9', 'answer10']
+        for answer in answers:
+            verified = request.args[answer]
+            score += answer.value
     return render_template('test_result_page.html', score = score)
