@@ -9,7 +9,6 @@ regSpace = re.compile('\s\s*', re.DOTALL)
 regScript = re.compile('<script>.*?</script>', re.DOTALL)
 regComment = re.compile('<!--.*?-->', re.DOTALL)
 
-
 def mystem():
     os.system(r"mystem.exe " + "-d -e utf-8 " + 'input.txt' + " " + 'output.txt')
     return()
@@ -44,7 +43,45 @@ def clean_text(text):
     clean_t = regSpace.sub(' ', clean_t)
     html.unescape(clean_t)
     return clean_t
-       
+
+def create_dictionary():
+    dictionary = {}
+    file = open('dict1.csv', 'r', encoding = 'utf-8')
+    for line in file:
+        line2 = line.split('\t')
+        if len(line2) > 1:
+            line2[1] = line2[1].replace('\n', '')
+            dictionary[line2[0]]=line2[1]
+    return dictionary
+
+def orthographize(word):
+    new_word = dictionary.get(word, 'No key')
+    if new_word == 'No key':
+        new_word = ''
+        target = {'И', 'и', 'Й', 'й'}
+        vowels = {'у', 'е', 'ы', 'а', 'о', 'э', 'я', 'и', 'ю', 'й', 'У', 'Е', 'Ы', 'А', 'О', 'Э', 'Я', 'И', 'Ю', 'ь', 'ъ'}    
+        if len(word) > 1:
+            for i in range(0,len(word)-1):
+                if word[i] in target and word[i+1] in vowels:
+                    new_word += 'i'
+                 else:
+                    new_word += word[i]
+                    new_word += word[-1]
+             if new_word[-1] not in vowels:
+                new_word += 'ъ'
+             if new_word.startswith('бес'):
+                base = new_word[3:]
+                new_word = 'без' + base
+             if new_word.startswith('черес'):
+                base = new_word[5:]
+                new_word = 'через' + base
+             if new_word.startswith('чрес'):
+                base = new_word[4:]
+                new_word = 'чрез' + base
+             else:
+                new_word = word
+    return new_word
+
 app = Flask(__name__)
 
 @app.route('127.0.0.1/')
