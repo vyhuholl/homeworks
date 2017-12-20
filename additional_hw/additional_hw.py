@@ -1,11 +1,13 @@
 from flask import request
 from flask import render_template
-from pymystem3 import Mystem
 import urllib.request
 
-m = Mystem()
 regTag = re.compile('<.*?>', flags= re.DOTALL)
 regPostWord = re.compile('<font color="#808080"></font>&nbsp;</td><td class="uu">', flags= re.DOTALL)
+
+def mystem():
+    os.system(r"mystem.exe " + "-d -e utf-8 " + 'input.txt' + " " + 'output.txt')
+    return
 
 def download_page(pageUrl):
     try:
