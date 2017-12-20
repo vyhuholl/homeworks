@@ -9,6 +9,7 @@ regSpace = re.compile('\s\s*', re.DOTALL)
 regScript = re.compile('<script>.*?</script>', re.DOTALL)
 regComment = re.compile('<!--.*?-->', re.DOTALL)
 
+
 def mystem():
     os.system(r"mystem.exe " + "-d -e utf-8 " + 'input.txt' + " " + 'output.txt')
     return()
@@ -22,7 +23,18 @@ def download_page(pageUrl):
         return('Error')
     
 def lemmatize(text):
-    
+    mystem()
+    file = open('output.txt', 'r', encoding = 'utf-8')
+    text = file.read()
+    text = text.replace ('{', ' ')
+    text = text.replace ('}', ' ')    
+    text = text.replace ('?', '')
+    text = text.split()
+    new_text = ''
+    for i in range(1, len(text), 2):
+        new_word = one_word(text[i], dictionary)
+        new_text = new_text + new_word + ' '
+    return new_text
     
 def clean_text(text):
     clean_t = text.replace ('&nbsp;', '')
@@ -33,25 +45,17 @@ def clean_text(text):
     html.unescape(clean_t)
     return clean_t
        
-with open('dictionary.txt', 'w') as dictionary:
-    common_url = 'http://www.dorev.ru/ru-index.html?xmmpoll='
-    letters = ['а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ь', 'ы', 'э', 'ю', 'я']
-    for i in letters:
-        word_page = download_page(common_url + i)
-          
 app = Flask(__name__)
 
 @app.route('127.0.0.1/')
-def index():
+
+@app.route('127.0.0.1/<name>')
+def main_page(name=None):
     page = download_page('https://yandex.ru/pogoda/10463')
     weather = re.search('<time class="time fact__time"(.*?)<dl class="term fact__water">', text)
     weather = regTag.sub ('\n', weather.group())
     weather = regSpace.sub (' ', clean_weather)
-    return render_template('index.html', weather = weather)
-
-@app.route('127.0.0.1/<name>')
-def main_page(name=None):
-    return render_template('main_page.html', name=name)
+    return render_template('main_page.html', weather=weather)
 
 @app.route('127.0.0.1/news')
 def news_page(name=None):
