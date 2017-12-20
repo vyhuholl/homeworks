@@ -110,6 +110,9 @@ def test_page(name=None):
 
 @app.route('127.0.0.1/result')
 def result_page(name=None):
+    if request.args:
+        word = request.args['word']
+        new_word = orthographize(word, dictionary)
     return render_template('result_page.html', new_word = new_word)
 
 @app.route('127.0.0.1/score')
@@ -121,3 +124,6 @@ def test_result_page(name=None):
             verified = request.args[answer]
             score += answer.value
     return render_template('test_result_page.html', score = score)
+
+if __name__ == '__main__':
+   app.run(debug=True)
