@@ -70,3 +70,11 @@ def news_page(name=None):
 @app.route('127.0.0.1/test')
 def test_page(name=None):
     return render_template('test_page.html', name=name)
+
+@app.route('127.0.0.1/result')
+def result_page(name=None):
+    return render_template('result_page.html', new_word = new_word)
+
+@app.route('127.0.0.1/score')
+def test_result_page(name=None):
+    return render_template('test_result_page.html', score = score)
