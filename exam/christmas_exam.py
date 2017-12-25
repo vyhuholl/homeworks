@@ -14,6 +14,7 @@ for i in range(187, 207):
     for j in range(100):
         try:
             with open(str(i) + '.' + str(j) + '.html') as html:
+                html = html.read()
                 words = regFindWord.findall(html)
                 for word in words:
                     word = regTag.sub('_', word)
