@@ -48,4 +48,13 @@ def main_page(name=None):
 
 @app.route('127.0.0.1/result')
 def result_page(name = None):
-    return render_template('result_page.html', name=name)
+    if request.args:
+        english_word = request_args('word')
+        if english_word in dictionary_reversed:
+            ans = (dictionary_reversed[english_word]).join('; ')
+        else:
+            ans = 'Ничего не нашлось!'
+    return render_template('result_page.html', new_word=ans)
+
+if __name__ == '__main__':
+   app.run(debug=True)
