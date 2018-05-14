@@ -1,0 +1,194 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf version="1.2" xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3.org/2001/XMLSchema-instance">
+  <graph defaultedgetype="undirected" mode="static" name="">
+    <meta>
+      <creator>NetworkX 2.0</creator>
+      <lastmodified>14/05/2018</lastmodified>
+    </meta>
+    <nodes>
+      <node id="речь_NOUN" label="речь_NOUN" />
+      <node id="представление_NOUN" label="представление_NOUN" />
+      <node id="временной_ADJF" label="временной_ADJF" />
+      <node id="поисковый_ADJF" label="поисковый_ADJF" />
+      <node id="также_CONJ" label="также_CONJ" />
+      <node id="пришлый_ADJS" label="пришлый_ADJS" />
+      <node id="использоваться_VERB" label="использоваться_VERB" />
+      <node id="система_NOUN" label="система_NOUN" />
+      <node id="доцент_NOUN" label="доцент_NOUN" />
+      <node id="игра_NOUN" label="игра_NOUN" />
+      <node id="исследование_NOUN" label="исследование_NOUN" />
+      <node id="что_CONJ" label="что_CONJ" />
+      <node id="из_PREP" label="из_PREP" />
+      <node id="прочитать_INFN" label="прочитать_INFN" />
+      <node id="построение_NOUN" label="построение_NOUN" />
+      <node id="общество_NOUN" label="общество_NOUN" />
+      <node id="ореховый_ADJF" label="ореховый_ADJF" />
+      <node id="ответ_NOUN" label="ответ_NOUN" />
+      <node id="модель_NOUN" label="модель_NOUN" />
+      <node id="подобный_ADJF" label="подобный_ADJF" />
+      <node id="можно_PRED" label="можно_PRED" />
+      <node id="и_CONJ" label="и_CONJ" />
+      <node id="тот_ADJF" label="тот_ADJF" />
+      <node id="быть_INFN" label="быть_INFN" />
+      <node id="новый_ADJF" label="новый_ADJF" />
+      <node id="позволять_VERB" label="позволять_VERB" />
+      <node id="наука_NOUN" label="наука_NOUN" />
+      <node id="а_CONJ" label="а_CONJ" />
+      <node id="на_PREP" label="на_PREP" />
+      <node id="стереотип_NOUN" label="стереотип_NOUN" />
+      <node id="запустить_VERB" label="запустить_VERB" />
+      <node id="помощь_NOUN" label="помощь_NOUN" />
+      <node id="лаборатория_NOUN" label="лаборатория_NOUN" />
+      <node id="работа_NOUN" label="работа_NOUN" />
+      <node id="примерно_ADVB" label="примерно_ADVB" />
+      <node id="с_PREP" label="с_PREP" />
+      <node id="хотя_CONJ" label="хотя_CONJ" />
+      <node id="скорее_CONJ" label="скорее_CONJ" />
+      <node id="количественный_ADJF" label="количественный_ADJF" />
+      <node id="заниматься_VERB" label="заниматься_VERB" />
+      <node id="демонстрировать_VERB" label="демонстрировать_VERB" />
+      <node id="же_PRCL" label="же_PRCL" />
+      <node id="написать_PRTF" label="написать_PRTF" />
+      <node id="находить_VERB" label="находить_VERB" />
+      <node id="получение_NOUN" label="получение_NOUN" />
+      <node id="векторный_ADJF" label="векторный_ADJF" />
+      <node id="голосовой_ADJF" label="голосовой_ADJF" />
+      <node id="текст_NOUN" label="текст_NOUN" />
+      <node id="гуманитарный_ADJF" label="гуманитарный_ADJF" />
+      <node id="оценить_INFN" label="оценить_INFN" />
+      <node id="нет_PRED" label="нет_PRED" />
+      <node id="голова_NOUN" label="голова_NOUN" />
+      <node id="всего_ADVB" label="всего_ADVB" />
+      <node id="семантический_ADJF" label="семантический_ADJF" />
+      <node id="это_NPRO" label="это_NPRO" />
+      <node id="эффективный_ADJF" label="эффективный_ADJF" />
+      <node id="вектор_NOUN" label="вектор_NOUN" />
+      <node id="самый_ADJF" label="самый_ADJF" />
+      <node id="этот_ADJF" label="этот_ADJF" />
+      <node id="материал_NOUN" label="материал_NOUN" />
+      <node id="который_ADJF" label="который_ADJF" />
+      <node id="указывать_VERB" label="указывать_VERB" />
+      <node id="естественный_ADJF" label="естественный_ADJF" />
+      <node id="качество_NOUN" label="качество_NOUN" />
+      <node id="ия_NOUN" label="ия_NOUN" />
+      <node id="применяться_VERB" label="применяться_VERB" />
+      <node id="количество_NOUN" label="количество_NOUN" />
+      <node id="инструмент_NOUN" label="инструмент_NOUN" />
+      <node id="задача_NOUN" label="задача_NOUN" />
+      <node id="обрабатывать_VERB" label="обрабатывать_VERB" />
+      <node id="запрос_NOUN" label="запрос_NOUN" />
+      <node id="первое_NOUN" label="первое_NOUN" />
+      <node id="лингвистика_NOUN" label="лингвистика_NOUN" />
+      <node id="использовать_PRTF" label="использовать_PRTF" />
+      <node id="сервис_NOUN" label="сервис_NOUN" />
+      <node id="дистрибутивный_ADJF" label="дистрибутивный_ADJF" />
+      <node id="утвердительный_ADJF" label="утвердительный_ADJF" />
+      <node id="вопрос_NOUN" label="вопрос_NOUN" />
+      <node id="важный_ADJF" label="важный_ADJF" />
+      <node id="распознавать_INFN" label="распознавать_INFN" />
+      <node id="результат_NOUN" label="результат_NOUN" />
+      <node id="семантически_ADVB" label="семантически_ADVB" />
+      <node id="предлагать_VERB" label="предлагать_VERB" />
+      <node id="способность_NOUN" label="способность_NOUN" />
+      <node id="многомерный_ADJF" label="многомерный_ADJF" />
+      <node id="анализ_NOUN" label="анализ_NOUN" />
+      <node id="например_CONJ" label="например_CONJ" />
+      <node id="близость_NOUN" label="близость_NOUN" />
+      <node id="доступный_ADJF" label="доступный_ADJF" />
+      <node id="играть_INFN" label="играть_INFN" />
+      <node id="когда_CONJ" label="когда_CONJ" />
+      <node id="теоретический_ADJF" label="теоретический_ADJF" />
+      <node id="представить_PRTS" label="представить_PRTS" />
+      <node id="требовать_VERB" label="требовать_VERB" />
+      <node id="для_PREP" label="для_PREP" />
+      <node id="борис_NOUN" label="борис_NOUN" />
+      <node id="похожий_ADJF" label="похожий_ADJF" />
+      <node id="хорошо_ADVB" label="хорошо_ADVB" />
+      <node id="при_PREP" label="при_PREP" />
+      <node id="изменение_NOUN" label="изменение_NOUN" />
+      <node id="период_NOUN" label="период_NOUN" />
+      <node id="наш_ADJF" label="наш_ADJF" />
+      <node id="так_CONJ" label="так_CONJ" />
+      <node id="но_CONJ" label="но_CONJ" />
+      <node id="использовать_INFN" label="использовать_INFN" />
+      <node id="о_PREP" label="о_PREP" />
+      <node id="вид_NOUN" label="вид_NOUN" />
+      <node id="смысл_NOUN" label="смысл_NOUN" />
+      <node id="свой_ADJF" label="свой_ADJF" />
+      <node id="получать_INFN" label="получать_INFN" />
+      <node id="между_PREP" label="между_PREP" />
+      <node id="область_NOUN" label="область_NOUN" />
+      <node id="разный_ADJF" label="разный_ADJF" />
+      <node id="в_PREP" label="в_PREP" />
+      <node id="обработка_NOUN" label="обработка_NOUN" />
+      <node id="это_PRCL" label="это_PRCL" />
+      <node id="поступить_VERB" label="поступить_VERB" />
+      <node id="один_ADJF" label="один_ADJF" />
+      <node id="семантика_NOUN" label="семантика_NOUN" />
+      <node id="автоматический_ADJF" label="автоматический_ADJF" />
+      <node id="заниматься_PRTF" label="заниматься_PRTF" />
+      <node id="такой_ADJF" label="такой_ADJF" />
+      <node id="хороший_ADJF" label="хороший_ADJF" />
+      <node id="социологический_ADJF" label="социологический_ADJF" />
+      <node id="показывать_VERB" label="показывать_VERB" />
+      <node id="большой_ADJF" label="большой_ADJF" />
+      <node id="дать_PRTF" label="дать_PRTF" />
+      <node id="книга_NOUN" label="книга_NOUN" />
+      <node id="метод_NOUN" label="метод_NOUN" />
+      <node id="пользователь_NOUN" label="пользователь_NOUN" />
+      <node id="находить_INFN" label="находить_INFN" />
+      <node id="сообщать_VERB" label="сообщать_VERB" />
+      <node id="обучение_NOUN" label="обучение_NOUN" />
+      <node id="ввести_INFN" label="ввести_INFN" />
+      <node id="он_NPRO" label="он_NPRO" />
+      <node id="действовать_VERB" label="действовать_VERB" />
+      <node id="насколько_ADVB" label="насколько_ADVB" />
+      <node id="поиск_NOUN" label="поиск_NOUN" />
+      <node id="простой_ADJF" label="простой_ADJF" />
+      <node id="дальнейший_ADJF" label="дальнейший_ADJF" />
+      <node id="мочь_VERB" label="мочь_VERB" />
+      <node id="компания_NOUN" label="компания_NOUN" />
+      <node id="рамка_NOUN" label="рамка_NOUN" />
+      <node id="интеллект_NOUN" label="интеллект_NOUN" />
+      <node id="интервью_NOUN" label="интервью_NOUN" />
+      <node id="компьютерный_ADJF" label="компьютерный_ADJF" />
+      <node id="связанный_ADJF" label="связанный_ADJF" />
+      <node id="они_NPRO" label="они_NPRO" />
+      <node id="язык_NOUN" label="язык_NOUN" />
+      <node id="тетрис_NOUN" label="тетрис_NOUN" />
+      <node id="школа_NOUN" label="школа_NOUN" />
+      <node id="слово_NOUN" label="слово_NOUN" />
+      <node id="выражение_NOUN" label="выражение_NOUN" />
+      <node id="вы_NPRO" label="вы_NPRO" />
+      <node id="от_PREP" label="от_PREP" />
+      <node id="информация_NOUN" label="информация_NOUN" />
+      <node id="искусственный_ADJF" label="искусственный_ADJF" />
+      <node id="как_CONJ" label="как_CONJ" />
+      <node id="два_ADJF" label="два_ADJF" />
+      <node id="два_NUMR" label="два_NUMR" />
+      <node id="отдельный_ADJF" label="отдельный_ADJF" />
+      <node id="друг_NOUN" label="друг_NOUN" />
+    </nodes>
+    <edges>
+      <edge id="0" source="использоваться_VERB" target="применяться_VERB" />
+      <edge id="1" source="система_NOUN" target="метод_NOUN" />
+      <edge id="2" source="исследование_NOUN" target="лаборатория_NOUN" />
+      <edge id="3" source="исследование_NOUN" target="анализ_NOUN" />
+      <edge id="4" source="исследование_NOUN" target="метод_NOUN" />
+      <edge id="5" source="наука_NOUN" target="лингвистика_NOUN" />
+      <edge id="6" source="демонстрировать_VERB" target="показывать_VERB" />
+      <edge id="7" source="находить_VERB" target="поиск_NOUN" />
+      <edge id="8" source="указывать_VERB" target="показывать_VERB" />
+      <edge id="9" source="применяться_VERB" target="метод_NOUN" />
+      <edge id="10" source="задача_NOUN" target="вопрос_NOUN" />
+      <edge id="11" source="обрабатывать_VERB" target="обработка_NOUN" />
+      <edge id="12" source="лингвистика_NOUN" target="семантика_NOUN" />
+      <edge id="13" source="сервис_NOUN" target="пользователь_NOUN" />
+      <edge id="14" source="сервис_NOUN" target="компания_NOUN" />
+      <edge id="15" source="анализ_NOUN" target="обработка_NOUN" />
+      <edge id="16" source="анализ_NOUN" target="метод_NOUN" />
+      <edge id="17" source="пользователь_NOUN" target="информация_NOUN" />
+      <edge id="18" source="обучение_NOUN" target="школа_NOUN" />
+    </edges>
+  </graph>
+</gexf>
