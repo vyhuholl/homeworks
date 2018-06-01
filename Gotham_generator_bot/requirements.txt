@@ -1,0 +1,4 @@
+flask==0.12.2
+telebot==0.0.3
+requests==2.7.0
+pyTelegramBotAPI==2.2.3
